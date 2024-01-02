@@ -1,0 +1,105 @@
+<style>
+    .maincontainer{
+    background: #7ddf92af;
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+
+    }
+    .box{
+        background: #df8e8ee1;
+        width:70%;
+        height:60%;
+        border-radius: 10px;
+        padding-left:20px;
+        padding-right: 20px;
+        overflow-y: scroll;
+    }
+    .heading{
+        font-size: 24px;
+        font-weight: bold;
+        font-family: Oswald;
+        padding:5px;
+        letter-spacing: 1;
+
+    }
+    .image{width:50px;
+            height:50px;
+            padding:5px;
+           }
+    .headingdiv{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }     
+    .formDiv{
+        margin:10px;
+
+    }   
+    .gap{margin-bottom:10px;}
+    .btnstyle{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }     
+</style>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</head>
+<div class="maincontainer">
+    <div class="box">
+      <div class="headingdiv">
+        <div style="display: flex;">
+         <div><img src="/images/cinema.avif" class="image"></div>
+         <div class="heading">Movie Registration</div>
+        </div>
+         <div><a href="/movies/movie_interface" style="text-decoration: none;"><img src="/images/addmovies.png" style="width: 40px;"></a></div>
+      </div>
+
+    <%
+    if(data.length==0)
+    {%>
+    <%=message %>
+    <%}
+    else
+    {%>
+    <table class="table table-striped">
+        <tr>
+            <th>#</th>
+            <th>State/City</th>   
+            <th>Cinema/Screen</th>
+            <th>Id/Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Poster</th>
+            <th>Edit</th>
+        </tr>
+    
+    <% 
+    data.map((item,i)=>{%>
+    <tr><td><%=i+1%></td>   
+   
+    <td><%=item.statename%>/<br><%=item.cityname%></td> 
+   
+    <td><%=item.cinemaname%>/<br><%=item.screenname%></td> 
+    <td><%=item.movieid%>/<br><%=item.moviename%></td> 
+    <td><%=item.description%></td>
+    <td><%=item.status%></td>
+    <td><a href="/movies/editpicture?movieid=<%=item.movieid%>&moviename=<%=item.moviename%>&poster=<%=item.poster%>" style="text-decoration: none;"><img src="/images/<%=item.poster%>" style="width: 60px; height: 60px; border-radius: 30px;"></a></td>
+    <td><a href="/movies/editinformation?movieid=<%=item.movieid%>" style="text-decoration: none;"><img src="/images/edit.png" style="width:25px; height:25px; "></a></td></tr>
+    <%}) %>
+    </table>
+    <%}%>
+    </div>
+    </div>
+</html>
